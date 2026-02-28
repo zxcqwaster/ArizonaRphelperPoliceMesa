@@ -1,6 +1,6 @@
 script_name('AIPD Assistant')
 script_author('Codex')
-script_version('1.2.0')
+script_version('1.2.1')
 
 local ffi = require('ffi')
 local imgui = require('mimgui')
@@ -8,7 +8,7 @@ local encoding = require('encoding')
 local http = require('socket.http')
 local ltn12 = require('ltn12')
 
-encoding.default = 'CP1251'
+encoding.default = 'UTF-8'
 u8 = encoding.UTF8
 
 local windowState = imgui.new.bool(false)
@@ -146,19 +146,6 @@ local function openHelpLink()
 end
 
 
-local function normalizeServerText(text)
-  local raw = tostring(text or '')
-  local ok, decoded = pcall(function()
-    return u8:decode(raw)
-  end)
-
-  if ok and decoded and decoded ~= '' then
-    return decoded
-  end
-
-  return raw
-end
-
 local function postQuestion(question)
   local payload = encodeJson({ question = question })
   local responseBody = {}
@@ -235,7 +222,7 @@ imgui.OnFrame(
 
         lua_thread.create(function()
           local _, result = postQuestion(question)
-          answerText = normalizeServerText(result)
+          answerText = tostring(result or "Не удалось получить ответ.")
           waiting = false
         end)
       end
