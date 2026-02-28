@@ -1,4 +1,4 @@
- AIPD Assistant (Arizona RP Mesa)
+# AIPD Assistant (Arizona RP Mesa)
 
 Готовый комплект:
 - `aipd_moonloader.lua` — MoonLoader скрипт с ImGui-окном по команде `/AIPD`.
