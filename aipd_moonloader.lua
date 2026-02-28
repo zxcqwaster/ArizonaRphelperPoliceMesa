@@ -145,6 +145,20 @@ local function openHelpLink()
   end
 end
 
+
+local function normalizeServerText(text)
+  local raw = tostring(text or '')
+  local ok, decoded = pcall(function()
+    return u8:decode(raw)
+  end)
+
+  if ok and decoded and decoded ~= '' then
+    return decoded
+  end
+
+  return raw
+end
+
 local function postQuestion(question)
   local payload = encodeJson({ question = question })
   local responseBody = {}
@@ -221,7 +235,7 @@ imgui.OnFrame(
 
         lua_thread.create(function()
           local _, result = postQuestion(question)
-          answerText = result
+          answerText = normalizeServerText(result)
           waiting = false
         end)
       end
