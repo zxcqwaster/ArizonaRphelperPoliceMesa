@@ -1,5 +1,5 @@
 script_name('AIPD Assistant')
-script_author('zxcqwaster')
+script_author('Codex')
 script_version('1.2.0')
 
 local ffi = require('ffi')
