@@ -395,7 +395,7 @@ async function start() {
       }
 
       const response = await client.responses.create({
-        model: process.env.OPENAI_MODEL || 'gpt-5-nano',
+        model: process.env.OPENAI_MODEL || 'gpt-4-mini',
         input: [
           { role: 'system', content: SYSTEM_PROMPT },
           { role: 'system', content: KNOWLEDGE_BASE },
